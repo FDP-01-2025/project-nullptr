@@ -4,6 +4,7 @@
 #include "hiddentreasure.h"
 int main()
 {
+    int Treasurefound = 0, turn = 35;
     bool playermap[8][10] = {false}; //
     char basemap[8][10] = {
         {' ', ' ', ' ', ' ', '-', ' ', '-', ' ', '*', '-'},
@@ -14,11 +15,15 @@ int main()
         {' ', ' ', '*', ' ', ' ', ' ', '-', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' '},
         {'*', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' '}}; // Map of the hiddentreasure minigame blank space=nothing *=treasure and -=trap
-playermap[0][1]=true;
-playermap[0][3]=true;
-playermap[4][5]=true;
-playervisionsmap(basemap, playermap);
-return 0;
-
-
+while (Treasurefound <= 7 && turn > 0)
+{
+movement(basemap, playermap, turn, Treasurefound);
+playervisionsmap(basemap, playermap);}
+if (Treasurefound==7)
+{
+    cout << "I got it, better leave fast\n";
+}
+else 
+cout << "I m doomed\n";
+    return 0;
 }
