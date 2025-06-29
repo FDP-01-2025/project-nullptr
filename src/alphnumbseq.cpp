@@ -31,11 +31,48 @@ string playerGuess (int length) {
     return guess;
 }
 
+// Function that verificates if the player has guessed a character and if it's in the right position
+void guessVerification (const string& secret, const string& guess){
+    int wellPlaced = 0;
+    int wrongPlaced = 0;
+    vector <bool> usedSecret(secret.length(), false);
+    vector <bool> usedGuess(guess.length(), false);
+
+    for (int i = 0; i < secret.length(); i++) { // Verification for a right character in the right position
+        if (guess[i]==secret[i]){
+            wellPlaced ++;
+            usedSecret[i] = true;
+            usedGuess[i] = true;
+        }
+    }
+    for (int j = 0; j < guess.length(); j++) {
+        if (usedGuess[j]){
+            continue;
+        }
+        for (int k = 0; k < secret.length(); k++) { // Verification for a right character in the wrong position
+            if (!usedSecret[k] && guess[j] == secret[k]){
+                wrongPlaced ++;
+                usedSecret[k] = true;
+                break;
+            }
+        }
+    }
+    cout << "Characters placed in the correct position: " << wellPlaced <<endl;
+    cout << "Characters guessed but in a wrong position: " << wrongPlaced <<endl;
+}
+
 // Main game's function
 int alphnumbseq() {
-    int longitud = 5;
-    string secuencia = secretSequence(longitud);
-    string intento = playerGuess(longitud);;
+    int length = 5;
+    string Ssequence = secretSequence(length);
+    string Pguess;
+
+    do{
+        Pguess = playerGuess(length);
+        guessVerification (Ssequence, Pguess);
+    }while (Pguess != Ssequence);
+    cout << "YOU WON" << endl;
+
     cout << "-----Alphanumeric sequence-----" << endl; // Placeholder name
    
     return 0;
