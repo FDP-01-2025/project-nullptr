@@ -27,52 +27,112 @@ void playervisionsmap(char basemap[8][10], bool playermap[8][10])
         cout << endl;
     }
 }
+void guidesystem(char basemap[8][10], int row, int column)
+{
+    bool treasurenearby = false;
+    bool trapnearby = false;
+    if (row > 0)
+    {
+        if (basemap[row - 1][column] =='*')
+        {
+            treasurenearby = true;
+        }
+        if (basemap[row - 1][column] == '-')
+        {
+            trapnearby = true;
+        }
+    }
+    if (row < 7)
+    {
+        if (basemap[row + 1][column] == '*')
+        {
+            treasurenearby = true;
+        }
+        if (basemap[row + 1][column] == '-')
+        {
+            trapnearby = true;
+        }
+    }
+    if (column > 0)
+    {
+        if (basemap[row][column - 1] == '*')
+        {
+            treasurenearby = true;
+        }
+        if (basemap[row][column - 1] == '-')
+        {
+            trapnearby = true;
+        }
+    }
+    if (column < 9)
+    {
+        if (basemap[row][column + 1] == '*')
+        {
+            treasurenearby = true;
+        }
+        if (basemap[row][column + 1] == '-')
+        {
+            trapnearby = true;
+        }
+    }
+
+    if (treasurenearby)
+    {
+        cout << "I got a good feelin, a very well prized painting is nearby.\n";
+    }
+    if (trapnearby)
+    {
+        cout << "Something bad might happen in this zone.\n";
+    }
+}
 void movement(
     char basemap[8][10],
     bool playermap[8][10],
     int &turn,
     int &Treasurefound)
 
+{
+    cout << "Where should I go.\n";
+    int row, column;
+    cin >> row >> column;
+    if (row >= 0 && row < 8 && column >= 0 && column < 10)
     {
-        cout << "Where should I go.\n";
-        int row, column;
-        cin >> row >> column;
-        if (row >= 0 && row < 8 && column >= 0 && column < 10)
+        if (!playermap[row][column])
         {
-            if (!playermap[row][column])
+            playermap[row][column] = true;
+            if (basemap[row][column] == '*')
             {
-                playermap[row][column] = true;
-                if (basemap[row][column] == '*')
-                {
-                    cout << "I better steal this painting.\n";
-                    Treasurefound = Treasurefound + 1;
-                    turn = turn - 1;
-                    cout << "I got " << Treasurefound << " of the 7 painting I need\n";
-                    cout << "I have " << turn << " left before the alarm detects me\n";
-                }
-                else if (basemap[row][column] == '-')
-                {
-                    cout << "Oh no, this was a fake.\n";
-                    turn = turn - 3;
-                    cout << "I have " << turn << " left before the alarm detects me\n";
-                }
-                else
-                {
-                    cout << "Nothing here, better keep searching\n";
-                    turn = turn - 1;
-                    cout << "I have " << turn << " left before the alarm detects me\n";
-                }
+                cout << "I better steal this painting.\n";
+                Treasurefound = Treasurefound + 1;
+                turn = turn - 1;
+                cout << "I got " << Treasurefound << " of the 7 painting I need\n";
+                cout << "I have " << turn << " left before the alarm detects me\n";
             }
-
+            else if (basemap[row][column] == '-')
+            {
+                cout << "Oh no, this was a fake.\n";
+                turn = turn - 3;
+                cout << "I have " << turn << " left before the alarm detects me\n";
+            }
             else
             {
-                cout << "I ve already searched here\n";
+                cout << "Nothing here, better keep searching\n";
+                turn = turn - 1;
+                cout << "I have " << turn << " left before the alarm detects me\n";
+                guidesystem(basemap, row, column);
             }
         }
+
         else
         {
-            cout << "I can search in that way, i need trie with some coordinate of the map\n";
+            cout << "I ve already searched here\n";
         }
     }
+    else
+    {
+        cout << "I can search in that way, i need trie with some coordinate of the map\n";
+    }
+}
+
 
 #endif
