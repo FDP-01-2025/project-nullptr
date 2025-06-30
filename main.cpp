@@ -14,6 +14,11 @@ int main() {
     bool guess = false;
     char letter;                    //last variable
 
+    while (ANS != CODEWORD && misses<7)
+    {
+    display_misses(misses);
+    display_status(incorrect, ANS);
+    }
 
 
 
