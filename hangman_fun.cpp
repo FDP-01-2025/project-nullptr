@@ -7,7 +7,7 @@ int misses = 1;
 
 //defining functions here!!!
 
-void hangman_intro()
+void hangman_intro()    //quick intro to the game's objective
 {
     cout<<"AHORCADO/n";
     cout<<"-------------------/n";
@@ -15,7 +15,7 @@ void hangman_intro()
     cout<<"-------------------/n";
 }
 
-void display_misses(int misses)
+void display_misses(int misses)     //A display with the amount of misses and the little hangman
 {
     if (misses==1)
     {
@@ -64,5 +64,32 @@ void display_misses(int misses)
     cout<<" / \\  |" <<endl;
     cout<<"      |"  <<endl;
     cout<<"========="  <<endl;
+    }
+}
+
+void display_status(vector<char> incorrect, string ANS)  //will display the exact letters that the user input that are incorrect
+{
+    cout<<"Incorrect Guesses: " <<endl;
+    for(int i=0; i<incorrect.size(); i++)
+    {
+        cout<<incorrect[i]<<" ";
+    }
+    
+    cout<<"\nCODEWORD: " <<endl;
+
+    for(int i=0; i<ANS.length(); i++)
+    {
+        cout<<ANS[i] <<" " <<endl;
+    }
+}
+
+void hangman_outro(string ANS, string CODEWORD)
+{
+    if(ANS==CODEWORD){
+        cout<<"Good job! You saved x! You've earned (REWARD GOES HERE LOL)" <<endl;
+        cout<<"Congrats!" <<endl;
+    }
+    else{
+        cout<<"You lost thief! X has been hanged!" <<endl;
     }
 }
