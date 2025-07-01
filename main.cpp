@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <hangman_fun.h> //declaring functions for HANGMAN
 #include <hangman_fun.cpp>
 using namespace std;
 int main() {
