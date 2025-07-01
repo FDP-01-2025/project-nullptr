@@ -3,8 +3,9 @@
 #include <iostream>
 using namespace std;
 
-void seemaze(char mazebase[20][20]){
-        cout << "+";
+void seemaze(char mazebase[20][20], int xcoord, int ycoord)
+{
+    cout << "+";
     for (int i = 0; i < 20; i++)
         cout << "-";
     {
@@ -15,7 +16,12 @@ void seemaze(char mazebase[20][20]){
         cout << "|";
         for (int j = 0; j < 20; j++)
         {
-         cout << mazebase[i][j];
+            if (i == ycoord && j == xcoord)
+            {
+                cout << 'P';
+            }
+            else
+                cout << mazebase[i][j];
         }
         cout << "|" << endl;
     }
@@ -26,4 +32,44 @@ void seemaze(char mazebase[20][20]){
         cout << "+" << endl;
     }
 }
+void playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
+{
+    bool playingnow = true;
+    char movement;
+    while (playingnow)
+    {
+        seemaze(mazebase, xcoordi, ycoordi);
+        cin >> movement;
+        int Xx = xcoordi, Yy = ycoordi;
+        if (movement == 'W' || movement == 'w')
+            Yy--;
+        else if (movement == 'S' || movement == 's')
+            Yy++;
+        else if (movement == 'A' || movement == 'a')
+            Xx--;
+        else if (movement == 'D' || movement == 'd')
+            Xx++;
+
+        if (Xx < 0 || Xx >= 20 || Yy < 0 || Yy >= 20)
+        {
+            cout << "I cant escape in that way!\n";
+            continue;
+        }
+        if (mazebase[Yy][Xx] == '#')
+        {
+            cout << "Thats a wall!\n";
+            continue;
+        }
+
+        if (mazebase[Yy][Xx] == 'W')
+        {
+            cout << "I escaped!\n";
+            break;
+        }
+
+        xcoordi = Xx;
+        ycoordi = Yy;
+    }
+}
+
 #endif
