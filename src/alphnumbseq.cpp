@@ -32,15 +32,17 @@ string playerGuess (int length) {
 }
 
 // Function that verificates if the player has guessed a character and if it's in the right position
-void guessVerification (const string& secret, const string& guess){
+void guessVerification (const string& secret, const string& guess, string& partialResult){
     int wellPlaced = 0;
-    int wrongPlaced = 0;
+    int missPlaced = 0;
     vector <bool> usedSecret(secret.length(), false);
     vector <bool> usedGuess(guess.length(), false);
+    string misplacedChars = " ";
 
     for (int i = 0; i < secret.length(); i++) { // Verification for a right character in the right position
         if (guess[i]==secret[i]){
             wellPlaced ++;
+            partialResult[i] = guess[i];
             usedSecret[i] = true;
             usedGuess[i] = true;
         }
@@ -51,26 +53,31 @@ void guessVerification (const string& secret, const string& guess){
         }
         for (int k = 0; k < secret.length(); k++) { // Verification for a right character in the wrong position
             if (!usedSecret[k] && guess[j] == secret[k]){
-                wrongPlaced ++;
+                missPlaced ++;
                 usedSecret[k] = true;
+                misplacedChars += guess[j];
                 break;
             }
         }
     }
     cout << "Characters placed in the correct position: " << wellPlaced <<endl;
-    cout << "Characters guessed but in a wrong position: " << wrongPlaced <<endl;
+    cout << "Characters guessed but in a wrong position: " << missPlaced <<endl;
+    cout << "Characters in wrong position: " << misplacedChars <<endl;
+    cout << "Sequence: " << partialResult <<endl;
+    
 }
 
 // Main game's function
 int alphnumbseq() {
     int length = 5;
-    string Ssequence = secretSequence(length);
-    string Pguess;
+    string S_sequence = secretSequence(length);
+    string P_guess;
+    string partialResult(S_sequence.length(), '_');
 
     do{
-        Pguess = playerGuess(length);
-        guessVerification (Ssequence, Pguess);
-    }while (Pguess != Ssequence);
+        P_guess = playerGuess(length);
+        guessVerification (S_sequence, P_guess, partialResult);
+    }while (P_guess != S_sequence);
     cout << "YOU WON" << endl;
 
     cout << "-----Alphanumeric sequence-----" << endl; // Placeholder name
