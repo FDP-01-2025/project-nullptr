@@ -70,17 +70,33 @@ void guessVerification (const string& secret, const string& guess, string& parti
 // Main game's function
 int alphnumbseq() {
     int length = 5;
+
+    for (int roundCount = 0; roundCount < 3; roundCount++){
     string S_sequence = secretSequence(length);
     string P_guess;
     string partialResult(S_sequence.length(), '_');
-
-    do{
-        P_guess = playerGuess(length);
-        guessVerification (S_sequence, P_guess, partialResult);
-    }while (P_guess != S_sequence);
-    cout << "YOU WON" << endl;
+    int attemptCount = 0;
+    bool won = false;
 
     cout << "-----Alphanumeric sequence-----" << endl; // Placeholder name
-   
+    cout << "Round: " << roundCount + 1 <<endl;
+    while (attemptCount < 10){
+        cout << "Attempt: " << attemptCount + 1 << " of 10" << endl;
+        P_guess = playerGuess(length);
+        attemptCount ++;
+        guessVerification (S_sequence, P_guess, partialResult);
+
+        if (P_guess == S_sequence){
+            cout << "YOU WON" << endl;
+            won = true;
+            break;
+        }
+    }
+
+    if (!won){
+        cout << "You ran out of attempts, the correct sequence was: " <<S_sequence << endl;
+    }
+
+    }
     return 0;
 }
