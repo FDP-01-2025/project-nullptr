@@ -1,8 +1,8 @@
 #ifndef HANGMAN_FUN_H 
 #define HANGMAN_FUN_H 
 #include <iostream>
-using namespace std;
 #include <vector>
+using namespace std;
 
 //akdlakl
 
@@ -12,17 +12,28 @@ int misses = 1;
 
 void hangman_intro()    //quick intro to the game's objective
 {
-    cout<<"AHORCADO/n";
-    cout<<"-------------------/n";
-    cout<<"Objetivo: Salva a x de ser ahorcado, introduce la clave letra por letra./n";
-    cout<<"-------------------/n";
+    cout<<"     AHORCADO" <<endl;
+    cout<<"-------------------" <<endl;
+    cout<<"Objetivo: Salva a x de ser ahorcado, introduce la clave letra por letra." <<endl;
+    cout<<"-------------------" <<endl;
 }
 
 void display_misses(int misses)     //A display with the amount of misses and the little hangman
 {
-    if (misses==1)
+    if (misses==0)
     {
-     cout<<"1 MISS! 3 ATTEMPT REMAINING!" <<endl;
+    cout<<"========="  <<endl;
+    cout<<"  +---+"  <<endl;
+    cout<<"      |" <<endl;
+    cout<<"      |" <<endl;
+    cout<<"      |" <<endl;
+    cout<<"      |" <<endl;
+    cout<<"      |"  <<endl;
+    cout<<"========="  <<endl;
+    }
+    else if (misses==1)
+    {
+    cout<<"2 MISSES! 2 ATTEMPTS REMAINING!!" <<endl;
     cout<<"========="  <<endl;
     cout<<"  +---+"  <<endl;
     cout<<"  |   |" <<endl;
@@ -82,7 +93,7 @@ void display_status(vector<char> incorrect, string ANS)  //will display the exac
 
     for(int i=0; i<ANS.length(); i++)
     {
-        cout<<ANS[i] <<" " <<endl;
+        cout<<ANS[i] <<" ";
     }
 }
 

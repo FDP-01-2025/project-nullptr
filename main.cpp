@@ -1,20 +1,20 @@
 #include <iostream>
 #include <vector>
-#include <hangman_fun.cpp>
+#include "hangman_fun.cpp"
 using namespace std;
 int main() {
 
     //HANGMAN starts under this message!!!
-    hangman_intro();
+    hangman_intro(); //quick intro to the game
 
     string CODEWORD = "CODEWORDXD"; //first variable
-    string ANS = "_ _ _ _ _ _ _ _ _ _";
+    string ANS = "__________";
     int misses = 0;
     vector<char> incorrect;
     bool guess = false;
     char letter;                    //last variable
 
-    while (ANS != CODEWORD && misses<7)
+    while (ANS != CODEWORD && misses<4)
     {
     display_misses(misses);
 
@@ -22,7 +22,7 @@ int main() {
 
     cout<<"\n\nPlease enter your guess: " <<endl;
     cin>>letter;
-    }
+
 
     for(int i=0; i<CODEWORD.length(); i++)
     {
@@ -41,6 +41,7 @@ int main() {
         misses++;
     }
     guess = false;
+    }
 
     hangman_outro(ANS, CODEWORD);
 
