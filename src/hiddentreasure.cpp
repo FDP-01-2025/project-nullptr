@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "hiddentreasure.h"
-int main()
+void playhiddentreasure()
 {
     int Treasurefound = 0, turn = 35;
     bool playermap[8][10] = {false}; //
@@ -25,5 +25,5 @@ if (Treasurefound==7)
 }
 else 
 cout << "I m doomed\n";
-    return 0;
+
 }

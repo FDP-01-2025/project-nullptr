@@ -3,7 +3,7 @@
 #include <vector>
 #include "stealmaze.h"
 using namespace std;
-int main()
+void playstealmaze()
 {
     int XcoordP, YcoordP;
     char mazebase[20][20]{
