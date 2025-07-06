@@ -5,13 +5,14 @@
 #include "src\hiddentreasure.cpp"
 #include "src\hangman.cpp"
 #include "src\main_mnswp.cpp"
+#include "src\alphnumbseq.h"
 using namespace std;
 int main(){
 int lifes=3;
-bool passed;
-        //MINESWEPPER
+bool passed;   
+        //BANK MINIGAME?
     while (lifes > 0) {
-        passed = playminesweeper();  
+        passed = alphnumbseq();  
         if (passed) {
             break;
         } else {
@@ -57,6 +58,21 @@ bool passed;
     //BANKS STEAL
     while (lifes > 0) {
         passed = playhangman();  
+        if (passed) {
+            break;
+        } else {
+            lifes--;
+            cout << "You got  " << lifes  << " tries left\n";
+        }
+    }
+
+    if (lifes == 0) {
+        cout << "GAME OVER\n";
+        return 0;
+    }
+        //MINESWEPPER
+    while (lifes > 0) {
+        passed = playminesweeper();  
         if (passed) {
             break;
         } else {

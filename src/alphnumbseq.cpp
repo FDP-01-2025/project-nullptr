@@ -76,7 +76,7 @@ void guessVerification (const string& secret, const string& guess, string& parti
 }
 
 // Main game's function
-int alphnumbseq() {
+bool alphnumbseq() {
     int length = 5;
 
     cout << "\033[32m";
@@ -110,14 +110,16 @@ int alphnumbseq() {
         if (P_guess == S_sequence){
             cout << "\033[32mYOU WON\033[0m" << endl;
             won = true;
+            return true;
             break;
         }
     }
 
     if (!won){
         cout << "\033[31mYou ran out of attempts, the correct sequence was: \033[0m" << S_sequence << endl;
+        return false;
     }
 
     }
-    return 0;
+    
 }
