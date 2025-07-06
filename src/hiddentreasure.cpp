@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "hiddentreasure.h"
-void playhiddentreasure()
+bool playhiddentreasure()
 {
     int Treasurefound = 0, turn = 35;
     bool playermap[8][10] = {false}; //
@@ -15,15 +15,17 @@ void playhiddentreasure()
         {' ', ' ', '*', ' ', ' ', ' ', '-', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' '},
         {'*', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' '}}; // Map of the hiddentreasure minigame blank space=nothing *=treasure and -=trap
-while (Treasurefound <= 7 && turn > 0)
+while (Treasurefound < 7 && turn > 0)
 {
 movement(basemap, playermap, turn, Treasurefound);
 playervisionsmap(basemap, playermap);}
 if (Treasurefound==7)
 {
     cout << "I got it, better leave fast\n";
+    return true;
 }
 else 
 cout << "I m doomed\n";
+return false;
 
 }

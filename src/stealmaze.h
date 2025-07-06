@@ -34,7 +34,7 @@ void seemaze(char mazebase[20][20], int xcoord, int ycoord)
 }
 bool playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
 {
-    int movescount=30;
+    int movescount=80;
     char movement;
     while (movescount>0)
     {
