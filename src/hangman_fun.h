@@ -4,18 +4,17 @@
 #include <vector>
 using namespace std;
 
-//akdlakl
-
 int misses = 1;
 
 //defining functions here!!!
 
 void hangman_intro()    //quick intro to the game's objective
 {
-    cout<<"     AHORCADO" <<endl;
-    cout<<"-------------------" <<endl;
-    cout<<"Objetivo: Salva a x de ser ahorcado, introduce la clave letra por letra." <<endl;
-    cout<<"-------------------" <<endl;
+    cout<<"                    HANGMAN" <<endl;
+    cout<<"              -------------------" <<endl;
+    cout<<"Guess the code to unlock the safe and get the money!" <<endl;
+    cout<<"          Input one letter at a time" <<endl;
+    cout<<"              -------------------" <<endl;
 }
 
 void display_misses(int misses)     //A display with the amount of misses and the little hangman
@@ -104,7 +103,7 @@ void hangman_outro(string ANS, string CODEWORD)
         cout<<"Congrats!" <<endl;
     }
     else{
-        cout<<"You lost thief! X has been hanged!" <<endl;
+        cout<<"You lost thief! The safe has been locked up for good! D:" <<endl;
     }
 }
 

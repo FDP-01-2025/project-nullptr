@@ -1,8 +1,16 @@
 #include <iostream>
 #include <vector>
-#include "hangman_fun.cpp"
+#include "hangman_fun.h"
 using namespace std;
-int main() {
+
+//declaring functions here!!!
+void hangman_intro();
+void display_misses(int misses);
+void display_status(vector<char> incorrect, string ANS);
+void end_game(string ANS, string CODEWORD);
+
+//HANGMAN IS DOWN HERE
+void playhangman() {
 
     //HANGMAN starts under this message!!!
     hangman_intro(); //quick intro to the game
@@ -46,5 +54,4 @@ int main() {
     hangman_outro(ANS, CODEWORD);
 
     //HANGMAN ends before this message!!!
-return 0;
 }
