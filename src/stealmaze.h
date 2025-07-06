@@ -32,11 +32,11 @@ void seemaze(char mazebase[20][20], int xcoord, int ycoord)
         cout << "+" << endl;
     }
 }
-void playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
+bool playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
 {
-    bool playingnow = true;
+    int movescount=30;
     char movement;
-    while (playingnow)
+    while (movescount>0)
     {
         seemaze(mazebase, xcoordi, ycoordi);
         cin >> movement;
@@ -64,12 +64,16 @@ void playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
         if (mazebase[Yy][Xx] == 'W')
         {
             cout << "I escaped!\n";
-            break;
+            return true;
         }
 
         xcoordi = Xx;
         ycoordi = Yy;
+        movescount--;
+        
     }
+    cout << "No more moves. I got caught!\n";
+    return false;
 }
 
 #endif
