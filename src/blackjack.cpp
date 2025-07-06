@@ -6,7 +6,6 @@
 
 // Function that shuffles the deck to create 
 void shuffleDeck(vector<Card>& deck) {
-    srand(time(0));
     for (int i = 0; i < deck.size(); ++i) {
         int j = rand() % deck.size();
         swap(deck[i], deck[j]);
@@ -118,38 +117,63 @@ void dealerTurn(vector<Card>& dealerHand, vector<Card>& deck) {
     cout << "\nDealer total: " << calculateHandValue(dealerHand) <<endl;
 }
 
-
+// Game's main function
 int main() { // Renombrar a blackjack después
-    vector<Card> deck = createDeck();
-    vector<Card> playerHand;
-    vector<Card> dealerHand;
 
-    dealInitialCards(deck, playerHand, dealerHand);
+    cout << "Blackjack" << endl; // Por decorar
+    int playerWins = 0;
+    int dealerWins = 0;
 
-    showHand("Dealer", dealerHand, true);
+    for (int roundCount = 0; roundCount < 5; roundCount++) {
+        cout << "Round: " << roundCount + 1 << endl;
+        srand(time(0));
+        vector<Card> deck = createDeck();
+        vector<Card> playerHand;
+        vector<Card> dealerHand;
 
-    bool stillInGame = playerTurn(playerHand, deck);
+        dealInitialCards(deck, playerHand, dealerHand);
 
-    if (stillInGame && calculateHandValue(playerHand) < 21) {
-        dealerTurn(dealerHand, deck);
-    }   
+        showHand("Dealer", dealerHand, true);
 
-    int playerTotal = calculateHandValue(playerHand);
-    int dealerTotal = calculateHandValue(dealerHand);
+        bool stillInGame = playerTurn(playerHand, deck);
 
-    cout << endl;
+        if (stillInGame && calculateHandValue(playerHand) < 21) {
+            dealerTurn(dealerHand, deck);
+        }   
 
-    if (playerTotal > 21) {
-        cout << "You busted! Dealer wins." << endl;
-    } else if (dealerTotal > 21) {
-        cout << "Dealer busted! You win!" << endl;
-    } else if (playerTotal > dealerTotal) {
-        cout << "You win!" << endl;
-    } else if (playerTotal < dealerTotal) {
-        cout << "Dealer wins!" << endl;
-    } else {
-        cout << "It's a tie!" << endl;
+        int playerTotal = calculateHandValue(playerHand);
+        int dealerTotal = calculateHandValue(dealerHand);
+
+        cout << endl;
+
+        if (playerTotal > 21) {
+            cout << "You busted! Dealer wins." << endl;
+            dealerWins ++;
+        } else if (dealerTotal > 21) {
+            cout << "Dealer busted! You win!" << endl;
+            playerWins ++;
+        } else if (playerTotal > dealerTotal) {
+            cout << "You win!" << endl;
+            playerWins ++;
+        } else if (playerTotal < dealerTotal) {
+            cout << "Dealer wins!" << endl;
+            dealerWins ++;
+        } else {
+            cout << "It's a tie!" << endl;
+        }
+        cout << endl;
     }
 
+    cout << "\n=== Final Score ===\n";
+    cout << "Player's Wins: " << playerWins << endl;
+    cout << "Dealer's Wins: " << dealerWins << endl;
+
+    if (playerWins > dealerWins) {
+        cout << "You are the overall winner!" << endl;
+    } else if (dealerWins > playerWins) {
+        cout << "Dealer wins the match!" << endl;
+    } else {
+        cout << "It's a draw!" << endl;
+    }
     return 0;
 }
