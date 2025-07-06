@@ -63,28 +63,36 @@ int calculateHandValue(const vector<Card>& hand) {
 }
 
 // Function that shows the hands
-void showHand(const string& name, const vector<Card>& hand) {
+void showHand(const string& name, const vector<Card>& hand, bool hideSecondCard = false) {
     cout << name << "'s hand: ";
-    for (const auto& card : hand) {
-        cout << "[" << card.rank << card.suit << "] ";
+    for (size_t i = 0; i < hand.size(); ++i) {
+        if (hideSecondCard && i == 1) {
+            cout << "[**] ";
+        } else {
+            cout << "[" << hand[i].rank << hand[i].suit << "] ";
+        }
     }
     cout << endl;
 }
 
 //Function for the player's turn
-void playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
+bool playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
     while (true) {
         int total = calculateHandValue(playerHand);
-        showHand("Player", playerHand);
+        showHand("Player", playerHand, false);
         cout << "\nYour total: " << total << endl;
 
+        if (total == 21){
+            cout << "Blackjack!" << endl;
+            return true;
+        }
+
         if (total > 21) {
-            cout << "You busted" << endl;
-            break;
+            return false;
         }
 
         char choice;
-        cout << "Do you want to [H]it or [S]tand?" << endl;
+        cout << "\nDo you want to [H]it or [S]tand?" << endl;
         cin >> choice;
         cin.clear();
         cin.ignore(10000, '\n');
@@ -105,8 +113,8 @@ void dealerTurn(vector<Card>& dealerHand, vector<Card>& deck) {
     while (calculateHandValue(dealerHand) < 17) {
         dealerHand.push_back(deck.back());
         deck.pop_back();
-        showHand("Dealer", dealerHand);
     }
+    showHand("Dealer", dealerHand);
     cout << "\nDealer total: " << calculateHandValue(dealerHand) <<endl;
 }
 
@@ -118,13 +126,30 @@ int main() { // Renombrar a blackjack después
 
     dealInitialCards(deck, playerHand, dealerHand);
 
-    showHand("Dealer", dealerHand); // Ocultar la segunda carta xd
+    showHand("Dealer", dealerHand, true);
 
-    playerTurn(playerHand, deck);
+    bool stillInGame = playerTurn(playerHand, deck);
 
-    if (calculateHandValue(playerHand) <= 21) {
+    if (stillInGame && calculateHandValue(playerHand) < 21) {
         dealerTurn(dealerHand, deck);
     }   
+
+    int playerTotal = calculateHandValue(playerHand);
+    int dealerTotal = calculateHandValue(dealerHand);
+
+    cout << endl;
+
+    if (playerTotal > 21) {
+        cout << "You busted! Dealer wins." << endl;
+    } else if (dealerTotal > 21) {
+        cout << "Dealer busted! You win!" << endl;
+    } else if (playerTotal > dealerTotal) {
+        cout << "You win!" << endl;
+    } else if (playerTotal < dealerTotal) {
+        cout << "Dealer wins!" << endl;
+    } else {
+        cout << "It's a tie!" << endl;
+    }
 
     return 0;
 }
