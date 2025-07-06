@@ -16,6 +16,6 @@ struct Player {
     int score = 0;
 };
 
-int blackjack();
+bool playblackjack();
 
 #endif

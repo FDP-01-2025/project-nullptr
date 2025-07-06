@@ -6,10 +6,21 @@
 #include "src\hangman.cpp"
 #include "src\main_mnswp.cpp"
 #include "src\alphnumbseq.h"
+#include "src\blackjack.cpp"
 using namespace std;
 int main(){
 int lifes=3;
-bool passed;   
+bool passed;  
+    //Blackjack
+     while (lifes > 0) {
+        passed = playblackjack();  
+        if (passed) {
+            break;
+        } else {
+            lifes--;
+            cout << "You got  " << lifes  << " tries left\n";
+        }
+    }
         //BANK MINIGAME?
     while (lifes > 0) {
         passed = alphnumbseq();  

@@ -118,7 +118,7 @@ void dealerTurn(vector<Card>& dealerHand, vector<Card>& deck) {
 }
 
 // Game's main function
-int main() { // Renombrar a blackjack después
+bool playblackjack() { // Renombrar a blackjack después
 
     cout << "Blackjack" << endl; // Por decorar
     int playerWins = 0;
@@ -170,10 +170,13 @@ int main() { // Renombrar a blackjack después
 
     if (playerWins > dealerWins) {
         cout << "You are the overall winner!" << endl;
+        return true;
     } else if (dealerWins > playerWins) {
         cout << "Dealer wins the match!" << endl;
+        return false;
     } else {
         cout << "It's a draw!" << endl;
+        return false;
     }
     return 0;
 }
