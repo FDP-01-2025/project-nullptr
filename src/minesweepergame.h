@@ -29,7 +29,7 @@ void displayGrid(bool showMines);
 void checkVictory();
 void revealCell(int row, int col);
 void toggleFlag(int row, int col);
-void playGame();
+bool playGame();
 
 
 
