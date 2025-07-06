@@ -19,7 +19,6 @@ string secretSequence(int length) {
         sequence += characters[index];
     }
 
-    cout << "Secuencia generada [BORRAR]: " << sequence << endl;
     return sequence;
 }
 
@@ -103,7 +102,7 @@ int alphnumbseq() {
     cout << "====================================================================" << endl;
     cout << "\033[36mRound: \033[0m" << roundCount + 1 <<endl;
     while (attemptCount < 10){
-        cout << "Attempt: " << attemptCount + 1 << " of 10" << endl;
+        cout << "\033[36mAttempt: \033[0m" << attemptCount + 1 << " \033[36mof\033[0m 10" << endl;
         P_guess = playerGuess(length);
         attemptCount ++;
         guessVerification (S_sequence, P_guess, partialResult, discardedChars);
