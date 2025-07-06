@@ -3,6 +3,7 @@
 #include <vector>
 #include "src\stealmaze.cpp"
 #include "src\hiddentreasure.cpp"
+#include "src\hangman.cpp"
 using namespace std;
 int main(){
 int lifes=3;
@@ -37,6 +38,20 @@ bool passed;
         cout << "GAME OVER\n";
         return 0;
     }
+    //BANKS STEAL
+    while (lifes > 0) {
+        passed = playhangman();  
+        if (passed) {
+            break;
+        } else {
+            lifes--;
+            cout << "You got  " << lifes  << " tries left\n";
+        }
+    }
 
-
+    if (lifes == 0) {
+        cout << "GAME OVER\n";
+        return 0;
+    }
+cout << "The bool works";
 }

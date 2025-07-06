@@ -10,7 +10,7 @@ void display_status(vector<char> incorrect, string ANS);
 void end_game(string ANS, string CODEWORD);
 
 //HANGMAN IS DOWN HERE
-void playhangman() {
+bool playhangman() {
 
     //HANGMAN starts under this message!!!
     hangman_intro(); //quick intro to the game

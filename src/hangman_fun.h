@@ -96,14 +96,16 @@ void display_status(vector<char> incorrect, string ANS)  //will display the exac
     }
 }
 
-void hangman_outro(string ANS, string CODEWORD)
+bool hangman_outro(string ANS, string CODEWORD)
 {
     if(ANS==CODEWORD){
         cout<<"Good job! You saved x! You've earned (REWARD GOES HERE LOL)" <<endl;
         cout<<"Congrats!" <<endl;
+        return true;
     }
     else{
         cout<<"You lost thief! The safe has been locked up for good! D:" <<endl;
+        return false;
     }
 }
 
