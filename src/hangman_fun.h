@@ -13,8 +13,8 @@ void hangman_intro()    //quick intro to the game's objective
 {
     cout<<"                    HANGMAN" <<endl;
     cout<<"              -------------------" <<endl;
-    cout<<"Guess the code to unlock the safe and get the money!" <<endl;
-    cout<<"          Input one letter at a time" <<endl;
+    cout<<"\033[32mGuess the code to unlock the safe and get the money!\033[0m" <<endl;
+    cout<<"          \033[32mInput one letter at a time\033[0m" <<endl;
     cout<<"              -------------------" <<endl;
 }
 
@@ -100,12 +100,12 @@ void display_status(vector<char> incorrect, string ANS)  //will display the exac
 bool hangman_outro(string ANS, string CODEWORD)
 {
     if(ANS==CODEWORD){
-        cout<<"Good job! You saved x! You've earned (REWARD GOES HERE LOL)" <<endl;
-        cout<<"Congrats!" <<endl;
+        cout<<"\033[33mGood job! You figured out the code!\033[0m" <<endl;
+        cout<<"\033[33mCongrats! :D\033[0m" <<endl;
         return true;
     }
     else{
-        cout<<"You lost thief! The safe has been locked up for good! D:" <<endl;
+        cout<<"\033[31mYou lost thief! The safe has been locked up for good! D:\033[0m" <<endl;
         return false;
     }
 }

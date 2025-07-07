@@ -93,7 +93,7 @@ bool passed;
     }
 
     if (lifes == 0) {
-        cout << "GAME OVER\n";
+        cout << " GAME OVER\n";
         return 0;
     }
 cout << "The bool works";

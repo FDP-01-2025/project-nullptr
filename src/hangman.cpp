@@ -41,10 +41,10 @@ bool playhangman() {
         }
     }
     if(guess){
-        cout<<"Correct guess!" <<endl;
+        cout<<"\033[32mCorrect guess!\033[0m" <<endl;
     }
     else {
-        cout<<"Incorrect guess!" <<endl;
+        cout<<"\033[31mIncorrect guess!\033[0m" <<endl;
         incorrect.push_back(letter);
         misses++;
     }
