@@ -7,10 +7,18 @@
 #include "src\main_mnswp.cpp"
 #include "src\alphnumbseq.h"
 #include "src\blackjack.cpp"
+#include "src\intromenu.h"
 using namespace std;
 int main(){
 int lifes=3;
 bool passed;  
+    //Intromenu
+    passed=intromenu();
+    if (!passed)
+    {
+        return 0;
+    }
+    else
     //Blackjack
      while (lifes > 0) {
         passed = playblackjack();  
@@ -21,80 +29,108 @@ bool passed;
             cout << "You got  " << lifes  << " tries left\n";
         }
     }
+        if (lifes == 0)
+    {
+        cout << "GAME OVER\n";
+        return 0;
+    }
         //BANK MINIGAME?
     while (lifes > 0) {
         passed = alphnumbseq();  
         if (passed) {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
-    if (lifes == 0) {
+    if (lifes == 0)
+    {
         cout << "GAME OVER\n";
         return 0;
     }
-    //MUSEUM STEAL
-    while (lifes > 0) {
-        passed = playhiddentreasure();  
-        if (passed) {
+    // MUSEUM STEAL
+    while (lifes > 0)
+    {
+        passed = playhiddentreasure();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
-    if (lifes == 0) {
+    if (lifes == 0)
+    {
         cout << "GAME OVER\n";
         return 0;
     }
-    
-    while (lifes > 0) {
-        passed = playstealmaze();  
-        if (passed) {
+
+    while (lifes > 0)
+    {
+        passed = playstealmaze();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
-    if (lifes == 0) {
+    if (lifes == 0)
+    {
         cout << "GAME OVER\n";
         return 0;
     }
-    //BANKS STEAL
-    while (lifes > 0) {
-        passed = playhangman();  
-        if (passed) {
+    // BANKS STEAL
+    while (lifes > 0)
+    {
+        passed = playhangman();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
-    if (lifes == 0) {
+    if (lifes == 0)
+    {
         cout << "GAME OVER\n";
         return 0;
     }
-        //MINESWEPPER
-    while (lifes > 0) {
-        passed = playminesweeper();  
-        if (passed) {
+    // MINESWEPPER
+    while (lifes > 0)
+    {
+        passed = playminesweeper();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
-    if (lifes == 0) {
+    if (lifes == 0)
+    {
         cout << " GAME OVER\n";
         return 0;
     }
-cout << "The bool works";
+    cout << "The bool works";
 }
