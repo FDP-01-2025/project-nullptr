@@ -186,7 +186,7 @@ bool playGame() {
         // Check if user wants to toggle a flag
         else if (command == 'F' || command == 'f') {
             cout << "Enter row and column: "; // Ask for coordinates
-            cin >> row >> col;              // Read coordinates from user
+            cin >> row >> col;               // Read coordinates from user
             toggleFlag(row, col);           // Call function to toggle flag
         } 
         // Handle invalid commands
