@@ -5,7 +5,7 @@
 
 //Global variables (can be used on all functions)
 int SIZE = 6; //Board size (6x6)
-int Mines_Number = 8; //Number of mines around the board
+int Sensors_Number = 8; //Number of Sensors around the board
 Cell grid[6][6]; // Game board (array for 36 cells)
 bool GameOver = false; // True when the game ends(win or lose)
 bool Victory = false;//True when the player wins
@@ -16,60 +16,60 @@ bool ValidCoordinates(int row, int col) {
     return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
 }
 
-int countMinesNear(int row, int col) {
-    // Function to count how many mines are near
-    int counter = 0; // Start counting from 0 mines
+int countSensorsNear(int row, int col) {
+    // Function to count how many Sensors are near
+    int counter = 0; // Start counting from 0 Sensors
     for (int i = -1; i <= 1; i++) {  // Check row above (-1), same row (0), row below (1)
         for (int j = -1; j <= 1; j++) {  // Check col left (-1), same col (0), col right (1)
             int newrow = row + i;  // Calculate neighbor's row position
             int newCol = col + j;  // Calculate neighbor's column position
             
-            // If neighbor is valid position AND has a mine
+            // If neighbor is valid position AND has a Sensors
             if (ValidCoordinates(newrow, newCol) && 
-                grid[newrow][newCol].hasMine) {
-                counter++; // Adds 1 to the mine counter
+                grid[newrow][newCol].hasSensor) {
+                counter++; // Adds 1 to the Sensors counter
             }
         }
     }
-    return counter; // Returns total mines around the cell
+    return counter; // Returns total Sensors around the cell
 }
 
 void startGame() {
     // First Initialize all cells to default values
     for (int i = 0; i < SIZE; i++) { // loop through each row
         for (int j = 0; j < SIZE; j++) { // loop through each column
-            grid[i][j].hasFlag = false;   // No flags initially
-            grid[i][j].hasMine = false;   // NO mines initially
+            grid[i][j].hasShield = false;   // No shields initially
+            grid[i][j].hasSensor = false;   // NO Sensors initially
             grid[i][j].revealed = false;  // all cells hidden initially
-            grid[i][j].MinesNear = 0;     // No mines near calculated YET
+            grid[i][j].SensorsNear = 0;     // No Sensors near calculated YET
         }
     }
 
     srand(time(0));                      // Initialize random generator with current time
-    int minesPlaced = 0;                 // Counter for how many mines we've placed
-    while (minesPlaced < Mines_Number) { // Keep placing until we have 8 mines
+    int SensorsPlaced = 0;                 // Counter for how many Sensors we've placed
+    while (SensorsPlaced < Sensors_Number) { // Keep placing until we have 8 Sensors
         int row = rand() % SIZE;         // Random row (0 to 5)
         int col = rand() % SIZE;         // Random column (0 to 5)
     
-        if (!grid[row][col].hasMine) {   // If this cell doesn't already have a mine
-            grid[row][col].hasMine = true;  // Place a mine here
-            minesPlaced++;                  // Increment our mine counter
+        if (!grid[row][col].hasSensor) {   // If this cell doesn't already have a Sensors
+            grid[row][col].hasSensor = true;  // Place a Sensor here
+            SensorsPlaced++;                  // Increment our Sensors counter
         }
-        // If cell already has mine, loop continues to try another position
+        // If cell already has Sensors, loop continues to try another position
     }
     
-    // Third, calculate numbers for all non-mine cells
+    // Third, calculate numbers for all non-Sensors cells
     for (int i = 0; i < SIZE; i++) {        // Loop through each row
         for (int j = 0; j < SIZE; j++) {    // Loop through each column
-            if (!grid[i][j].hasMine) {         // Only for cells that don't have mines
-                grid[i][j].MinesNear = countMinesNear(i, j); // Count mines around this cell
+            if (!grid[i][j].hasSensor) {         // Only for cells that don't have Sensors
+                grid[i][j].SensorsNear = countSensorsNear(i, j); // Count Sensors around this cell
             }
         }
     }
 }
 
-void displayGrid(bool showMines) {
-    // showMines = true when game ends to reveal all mines
+void displayGrid(bool showSensors) {
+    // showSensors = true when game ends to reveal all Sensors
     cout << endl; 
     
      cout << "    ";
@@ -81,15 +81,15 @@ void displayGrid(bool showMines) {
     for (int i = 0; i < SIZE; i++) {        // Loop through each row
         cout << "  " << i << " ";           // Print row number at start of each line
         for (int j = 0; j < SIZE; j++) {    // Loop through each column in this row
-            if (showMines && grid[i][j].hasMine) {         // If we're showing mines AND this cell has one
-                cout << " * ";                              // Show mine symbol (*)
-            } else if (grid[i][j].hasFlag) {               // Else if cell has a flag
-                cout << " S ";                              // Show flag symbol (F)
+            if (showSensors && grid[i][j].hasSensor) {         // If we're showing Sensors AND this cell has one
+                cout << " * ";                              // Show Sensors symbol (*)
+            } else if (grid[i][j].hasShield) {               // Else if cell has a shield
+                cout << " S ";                              // Show shield symbol (S)
             } else if (grid[i][j].revealed) {              // Else if cell is revealed
-                if (grid[i][j].MinesNear == 0) {       // If no mines around
+                if (grid[i][j].SensorsNear == 0) {       // If no Sensors around
                     cout << "   ";                          // Show empty space
-                } else {                                    // If there are mines around
-                    cout << " " << grid[i][j].MinesNear << " "; // Show the number
+                } else {                                    // If there are Sensors around
+                    cout << " " << grid[i][j].SensorsNear << " "; // Show the number
                 }
             } else {                                        // Else cell is hidden
                 cout << " # ";                              // Show hidden symbol
@@ -101,19 +101,19 @@ void displayGrid(bool showMines) {
 }
 
 void checkVictory() {
-    int revealedCells = 0;                  // Counter for revealed non-mine cells
+    int revealedCells = 0;                  // Counter for revealed non-Sensors cells
     for (int i = 0; i < SIZE; i++) {        // Loop through each row
         for (int j = 0; j < SIZE; j++) {    // Loop through each column
-            // If cell is revealed AND doesn't have a mine
-            if (grid[i][j].revealed && !grid[i][j].hasMine) {
+            // If cell is revealed AND doesn't have a Sensors
+            if (grid[i][j].revealed && !grid[i][j].hasSensor) {
                 revealedCells++;            // Count this cell
             }
         }
     }
     
-    // Win condition: all non-mine cells are revealed
-    // Total cells = 36, mines = 8, so need to reveal 28 cells
-    if (revealedCells == (SIZE * SIZE - Mines_Number)) {
+    // Win condition: all non-Sensors cells are revealed
+    // Total cells = 36, Sensors = 8, so need to reveal 28 cells
+    if (revealedCells == (SIZE * SIZE - Sensors_Number)) {
         Victory = true;                     // Player won
         GameOver = true;                    // Game is finished
         cout << "\033[32mCongratulations! You won the game!\033[0m\n"; // Victory message
@@ -121,25 +121,25 @@ void checkVictory() {
 }
 
 void revealCell(int row, int col) {
-    // Safety checks: don't reveal if coordinates invalid, already revealed, or has flag
+    // Safety checks: don't reveal if coordinates invalid, already revealed, or has shield
     if (!ValidCoordinates(row, col) ||     // Check if position is on the board
         grid[row][col].revealed ||          // Check if already revealed
-        grid[row][col].hasFlag) {           // Check if has flag (flagged cells can't be revealed)
+        grid[row][col].hasShield) {           // Check if has shield (shieldged cells can't be revealed)
         return;                             // Exit function without doing anything
     }
     
     grid[row][col].revealed = true;         // Mark this cell as revealed
     
-    // Check if player hit a mine (lose condition)
-    if (grid[row][col].hasMine) {
+    // Check if player hit a Sensors (lose condition)
+    if (grid[row][col].hasSensor) {
         GameOver = true;                    // Game ends
         cout << "\033[31mBOOM! You hit a sensor.\033[0m"; // Lose message
-        displayGrid(true);                  // Show board with all mines visible
+        displayGrid(true);                  // Show board with all Sensors visible
                   return;                  // Exit function
     }
     
-    // Auto-reveal feature: if cell has 0 adjacent mines, reveal all neighbors
-    if (grid[row][col].MinesNear == 0) {
+    // Auto-reveal feature: if cell has 0 adjacent Sensors, reveal all neighbors
+    if (grid[row][col].SensorsNear == 0) {
         for (int i = -1; i <= 1; i++) {    // Check all 8 directions around current cell
             for (int j = -1; j <= 1; j++) {
                 revealCell(row + i, col + j); // RECURSION: call this function on neighbor
@@ -151,25 +151,25 @@ void revealCell(int row, int col) {
     checkVictory();                         // After revealing, check if player won
 }
 
-void toggleFlag(int row, int col) {
-    // Can't flag if coordinates invalid or cell already revealed
+void toggleshield(int row, int col) {
+    // Can't shield if coordinates invalid or cell already revealed
     if (!ValidCoordinates(row, col) ||     // Check if position is on board
         grid[row][col].revealed) {          // Check if already revealed
         return;                             // Exit without doing anything
     }
     
-    // Toggle flag: if has flag, remove it; if no flag, add it
-    grid[row][col].hasFlag = !grid[row][col].hasFlag; // ! operator flips true/false
+    // Toggle shield: if has shield, remove it; if no shield, add it
+    grid[row][col].hasShield = !grid[row][col].hasShield; // ! operator flips true/false
 }
 
 bool playGame() {
-    cout << "=== MINESWEEPER ===\n";       // Game title
+    cout << "=== MINEWEEPER ===\n";       // Game title
     cout << "Commands:\n";                  // Instructions header
     cout << "R row col - Reveal cell\n";   // How to reveal
-    cout << "F row col - Toggle shield\n";   // How to flag             
+    cout << "F row col - Toggle shield\n";   // How to put a shield             
     
     while (!GameOver) {                     // Keep playing until game ends
-        displayGrid(false);                 // Show current board (don't show mines)
+        displayGrid(false);                 // Show current board (don't show Sensors)
         
         char command;                       // Variable to store user's command
         int row, col;                       // Variables to store coordinates
@@ -183,11 +183,11 @@ bool playGame() {
             cin >> row >> col;              // Read coordinates from user
             revealCell(row, col);           // Call function to reveal the cell
         } 
-        // Check if user wants to toggle a flag
+        // Check if user wants to toggle a shield
         else if (command == 'F' || command == 'f') {
             cout << "Enter row and column: "; // Ask for coordinates
-            cin >> row >> col;              // Read coordinates from user
-            toggleFlag(row, col);           // Call function to toggle flag
+            cin >> row >> col;               // Read coordinates from user
+            toggleshield(row, col);           // Call function to toggle shield
         } 
         // Handle invalid commands
         else {

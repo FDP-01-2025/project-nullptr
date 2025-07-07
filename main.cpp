@@ -7,18 +7,29 @@
 #include "src\main_mnswp.cpp"
 #include "src\alphnumbseq.h"
 #include "src\blackjack.cpp"
+#include "src\intromenu.h"
 using namespace std;
 int main(){
 int lifes=3;
 bool passed;
 char any;
-    
+
+    //Intromenu
+    passed=intromenu();
+    if (!passed)
+    {
+        return 0;
+    }
+    else
+
     cout<<"          You are a retired thief, once the best of them all.\n";                    //story intro
     cout<<"  You served time in prison and now your son is sick and in need of surgery.\n";
     cout<<"You decide to put your skills to use one last time, for a good cause this time.\n";
     cout<<"                       [Input any button to continue]\n";                            //instructions to continue
 
     cin>>any;
+
+    //CASINO
 
     cout<<"              You decide to do a heist on three places run by very rich people\n";
     cout<<"Your first objective is the Big Western Casino, you meet someone there who will take you to the money\n";
@@ -28,8 +39,9 @@ char any;
 
     cin>>any;
 
-    //CASINO
-     while (lifes > 0) {
+    //Blackjack
+
+    while (lifes > 0) {
         passed = playblackjack();  
         if (passed) {
             break;
@@ -38,6 +50,13 @@ char any;
             cout << "You got  " << lifes  << " tries left\n";
         }
     }
+
+    if (lifes == 0)
+    {
+        cout << "GAME OVER\n";
+        return 0;
+    }
+
 
     cout<<"                                'You got me, thief!' He says.\n";
     cout<<"                         'As promised, I'll take you to your money.'\n";
@@ -53,13 +72,16 @@ char any;
 
     cin>>any;
 
+        //CASINO 2
     while (lifes > 0) {
         passed = alphnumbseq();  
         if (passed) {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
@@ -82,14 +104,18 @@ char any;
 
     cin>>any;
 
-    //MUSEUM STEAL
-    while (lifes > 0) {
-        passed = playhiddentreasure();  
-        if (passed) {
+    // MUSEUM STEAL
+    while (lifes > 0)
+    {
+        passed = playhiddentreasure();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
 
@@ -97,6 +123,8 @@ char any;
         cout << "GAME OVER\n";
         return 0;
     }
+
+
     
     cout<<"You found the treasure but this place is huge... there must be more!\n";
     cout<<"                      Explore a bit!\n";
@@ -104,16 +132,19 @@ char any;
 
     cin>>any;
 
-    while (lifes > 0) {
-        passed = playstealmaze();  
-        if (passed) {
+    while (lifes > 0)
+    {
+        passed = playstealmaze();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
-
         if (lifes == 0) {
         cout << "GAME OVER\n";
         return 0;
@@ -141,16 +172,20 @@ char any;
 
     cin>>any;
 
-    while (lifes > 0) {
-        passed = playhangman();  
-        if (passed) {
+    // BANKS STEAL
+    while (lifes > 0)
+    {
+        passed = playhangman();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
-
         if (lifes == 0) {
         cout << "GAME OVER\n";
         return 0;
@@ -163,21 +198,25 @@ char any;
     cout<<"                             [Input any button to continue]\n";
     cin>>any;
 
-        //LASERS
-    while (lifes > 0) {
-        passed = playminesweeper();  
-        if (passed) {
+    //LASERS
+    while (lifes > 0)
+    {
+        passed = playminesweeper();
+        if (passed)
+        {
             break;
-        } else {
+        }
+        else
+        {
             lifes--;
-            cout << "You got  " << lifes  << " tries left\n";
+            cout << "You got  " << lifes << " tries left\n";
         }
     }
-
         if (lifes == 0) {
         cout << " GAME OVER\n";
         return 0;
     }
+
     cout<<"You run out of the bank as the alarm is triggered, no one has the speed to chase you and you escape with ease\n";
     cout<<"              You count the money... It's more than enough for your son!\n";
     cout<<"    You might be a criminal, thief. But you're first and foremost a good father... :)\n";
