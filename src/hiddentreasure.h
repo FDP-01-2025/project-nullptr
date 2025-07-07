@@ -92,7 +92,7 @@ void movement(
     int &Treasurefound)
 
 {
-    cout << "Where should I go.\n";
+    cout << "Where should I go?\n";
     int row, column;
     cin >> row >> column;
     if (row >= 0 && row < 8 && column >= 0 && column < 10)
