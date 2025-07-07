@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+using namespace std;
 
 // Function that shuffles the deck to create 
 void shuffleDeck(vector<Card>& deck) {
@@ -33,6 +34,12 @@ vector<Card> createDeck() {
     return deck;
 }
 
+// Function that gives colors the suits
+string colorSuit(const string& suit) {
+    if (suit == "H" || suit == "D") return "\033[31m" + suit + "\033[0m"; // Red
+    return "\033[34m" + suit + "\033[0m"; // Blue
+}
+
 // Function that deals the initial cards
 void dealInitialCards(vector<Card>& deck, vector<Card>& playerHand, vector<Card>& dealerHand) {
     playerHand.push_back(deck.back()); deck.pop_back();
@@ -61,14 +68,20 @@ int calculateHandValue(const vector<Card>& hand) {
     return total;
 }
 
+// Function that verificates if there is a natural blackjack
+bool isBlackjack(const vector<Card>& hand) {
+    return hand.size() == 2 && calculateHandValue(hand) == 21;
+}
+
 // Function that shows the hands
 void showHand(const string& name, const vector<Card>& hand, bool hideSecondCard = false) {
-    cout << name << "'s hand: ";
+    cout << "\033[93m" << name << "'s hand: \033[0m";
     for (size_t i = 0; i < hand.size(); ++i) {
         if (hideSecondCard && i == 1) {
             cout << "[**] ";
         } else {
-            cout << "[" << hand[i].rank << hand[i].suit << "] ";
+            string coloredSuit = colorSuit(hand[i].suit);
+            cout << "[" << hand[i].rank << coloredSuit << "] ";
         }
     }
     cout << endl;
@@ -79,10 +92,10 @@ bool playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
     while (true) {
         int total = calculateHandValue(playerHand);
         showHand("Player", playerHand, false);
-        cout << "\nYour total: " << total << endl;
+        cout << "\033[96m\nYour total: \033[0m" << total << endl;
 
         if (total == 21){
-            cout << "Blackjack!" << endl;
+            cout << "\033[92m21!\033[0m" << endl;
             return true;
         }
 
@@ -91,7 +104,7 @@ bool playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
         }
 
         char choice;
-        cout << "\nDo you want to [H]it or [S]tand?" << endl;
+        cout << "\033[33m\nDo you want to [H]it or [S]tand?\033[0m" << endl;
         cin >> choice;
         cin.clear();
         cin.ignore(10000, '\n');
@@ -102,7 +115,7 @@ bool playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
         } else if (choice == 'S' || choice == 's') {
             break;
         } else {
-            cout << "Invalid choice, try again" << endl;
+            cout << "\033[31mInvalid choice, try again\033[33m" << endl;
         }
     }
 }
@@ -114,24 +127,61 @@ void dealerTurn(vector<Card>& dealerHand, vector<Card>& deck) {
         deck.pop_back();
     }
     showHand("Dealer", dealerHand);
-    cout << "\nDealer total: " << calculateHandValue(dealerHand) <<endl;
+    cout << "\033[96m\nDealer total: \033[0m" << calculateHandValue(dealerHand) <<endl;
 }
 
 // Game's main function
-bool playblackjack() { // Renombrar a blackjack después
+bool playblackjack() {
 
-    cout << "Blackjack" << endl; // Por decorar
+    srand(time(0));
+    cout << "\033[32m";
+    cout << R"(
+    
+     ____  _            _       _            _    
+    | __ )| | __ _  ___| | __  | | __ _  ___| | __
+    |  _ \| |/ _` |/ __| |/ /  | |/ _` |/ __| |/ /
+    | |_) | | (_| | (__|   < |_| | (_| | (__|   < 
+    |____/|_|\__,_|\___|_|\_\___/ \__,_|\___|_|\_\
+    
+    )";
+    cout << "        Welcome to Blackjack - Beat the Dealer!\n";
+    cout << "\033[0m\n";
+
     int playerWins = 0;
     int dealerWins = 0;
 
     for (int roundCount = 0; roundCount < 5; roundCount++) {
-        cout << "Round: " << roundCount + 1 << endl;
-        srand(time(0));
+        cout << "\033[36mRound: \033[0m" << roundCount + 1 << endl;
         vector<Card> deck = createDeck();
         vector<Card> playerHand;
         vector<Card> dealerHand;
 
         dealInitialCards(deck, playerHand, dealerHand);
+
+        bool playerBJ = isBlackjack(playerHand);
+        bool dealerBJ = isBlackjack(dealerHand);
+
+        if (playerBJ || dealerBJ) {
+            showHand("Dealer", dealerHand);
+
+            int playerTotal = calculateHandValue(playerHand);
+            int dealerTotal = calculateHandValue(dealerHand);
+
+            cout << "\n";
+
+            if (playerBJ && dealerBJ) {
+                cout << "\033[33mBoth have Blackjack! It's a tie!\033[0m" << endl;
+            } else if (playerBJ) {
+                cout << "\033[32mBlackjack! You win!\033[0m" << endl;
+                showHand("Player", playerHand);
+                playerWins++;
+            } else {
+                cout << "\033[31mDealer has Blackjack! Dealer wins!\033[0m" << endl;
+                dealerWins++;
+            }
+        cout << endl;
+        continue;
+        }
 
         showHand("Dealer", dealerHand, true);
 
@@ -147,35 +197,35 @@ bool playblackjack() { // Renombrar a blackjack después
         cout << endl;
 
         if (playerTotal > 21) {
-            cout << "You busted! Dealer wins." << endl;
+            cout << "\033[31mYou busted! Dealer wins.\033[0m" << endl;
             dealerWins ++;
         } else if (dealerTotal > 21) {
-            cout << "Dealer busted! You win!" << endl;
+            cout << "\033[32mDealer busted! You win!\033[0m" << endl;
             playerWins ++;
         } else if (playerTotal > dealerTotal) {
-            cout << "You win!" << endl;
+            cout << "\033[32mYou win!\033[0m" << endl;
             playerWins ++;
         } else if (playerTotal < dealerTotal) {
-            cout << "Dealer wins!" << endl;
+            cout << "\033[31mDealer wins!\033[0m" << endl;
             dealerWins ++;
         } else {
-            cout << "It's a tie!" << endl;
+            cout << "\033[33mIt's a tie!\033[0m" << endl;
         }
         cout << endl;
     }
 
-    cout << "\n=== Final Score ===\n";
-    cout << "Player's Wins: " << playerWins << endl;
-    cout << "Dealer's Wins: " << dealerWins << endl;
+    cout << "\033[36m\n=== Final Score ===\n\033[0m";
+    cout << "\033[32mPlayer's Wins: \033[0m" << playerWins << endl;
+    cout << "\033[31mDealer's Wins: \033[0m" << dealerWins << endl;
 
     if (playerWins > dealerWins) {
-        cout << "You are the overall winner!" << endl;
+        cout << "\033[32mYou are the overall winner!\033[0m" << endl;
         return true;
     } else if (dealerWins > playerWins) {
-        cout << "Dealer wins the match!" << endl;
+        cout << "\033[31mDealer wins the match!\033[0m" << endl;
         return false;
     } else {
-        cout << "It's a draw!" << endl;
+        cout << "\033[33mIt's a draw!\033[0m" << endl;
         return false;
     }
     return 0;
