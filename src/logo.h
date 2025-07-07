@@ -1,8 +1,12 @@
+#ifndef LOGO_H
+#define LOGO_H
+
 #include <iostream>
 using namespace std;
 
-int main()
+void showlogo()
 {
+    cout << "\033[1;33m"; //Brilliant yellow
     cout << "            _________________                _________________     "<<endl;
     cout << "       ___________________________     __________________________ "<<endl;
     cout << "    ________________________________________________________________     "<<endl;
@@ -15,4 +19,7 @@ int main()
     cout << "    ___________            ____________________             ___________    "<<endl;
     cout << "       ___________________________     ____________________________ "<<endl;
     cout << "            __________________              __________________ "<<endl;
+    cout << "\033[0m"; //Turn back to normal color
 }
+
+#endif
