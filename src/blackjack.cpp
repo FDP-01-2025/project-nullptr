@@ -115,7 +115,7 @@ bool playerTurn(vector<Card>& playerHand, vector<Card>& deck) {
         } else if (choice == 'S' || choice == 's') {
             break;
         } else {
-            cout << "\033[31mInvalid choice, try again\033[33m" << endl;
+            cout << "\033[31mInvalid choice, try again\033[0m" << endl;
         }
     }
 }
@@ -228,5 +228,4 @@ bool playblackjack() {
         cout << "\033[33mIt's a draw!\033[0m" << endl;
         return false;
     }
-    return 0;
 }
