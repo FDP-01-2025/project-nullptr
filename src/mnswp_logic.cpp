@@ -84,7 +84,7 @@ void displayGrid(bool showMines) {
             if (showMines && grid[i][j].hasMine) {         // If we're showing mines AND this cell has one
                 cout << " * ";                              // Show mine symbol (*)
             } else if (grid[i][j].hasFlag) {               // Else if cell has a flag
-                cout << " F ";                              // Show flag symbol (F)
+                cout << " S ";                              // Show flag symbol (F)
             } else if (grid[i][j].revealed) {              // Else if cell is revealed
                 if (grid[i][j].MinesNear == 0) {       // If no mines around
                     cout << "   ";                          // Show empty space
@@ -116,7 +116,7 @@ void checkVictory() {
     if (revealedCells == (SIZE * SIZE - Mines_Number)) {
         Victory = true;                     // Player won
         GameOver = true;                    // Game is finished
-        cout << "Congratulations! You won the game!\n"; // Victory message
+        cout << "\033[32mCongratulations! You won the game!\033[0m\n"; // Victory message
     }
 }
 
@@ -133,7 +133,7 @@ void revealCell(int row, int col) {
     // Check if player hit a mine (lose condition)
     if (grid[row][col].hasMine) {
         GameOver = true;                    // Game ends
-        cout << "BOOM! You hit a mine. You lost!\n"; // Lose message
+        cout << "\033[31mBOOM! You hit a sensor.\033[0m"; // Lose message
         displayGrid(true);                  // Show board with all mines visible
                   return;                  // Exit function
     }
@@ -166,7 +166,7 @@ bool playGame() {
     cout << "=== MINESWEEPER ===\n";       // Game title
     cout << "Commands:\n";                  // Instructions header
     cout << "R row col - Reveal cell\n";   // How to reveal
-    cout << "F row col - Toggle flag\n";   // How to flag             
+    cout << "F row col - Toggle shield\n";   // How to flag             
     
     while (!GameOver) {                     // Keep playing until game ends
         displayGrid(false);                 // Show current board (don't show mines)
