@@ -23,9 +23,9 @@ extern bool Victory;//True when the player wins
 //Declaration of functions
 
 bool ValidCoordinates(int row, int col); 
-int countMinesNear(int row, int col); 
+int countSensorsNear(int row, int col); 
 void startGame();
-void displayGrid(bool showMines);
+void displayGrid(bool showSensors);
 void checkVictory();
 void revealCell(int row, int col);
 void toggleFlag(int row, int col);
