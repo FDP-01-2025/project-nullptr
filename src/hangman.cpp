@@ -15,8 +15,8 @@ bool playhangman() {
     //HANGMAN starts under this message!!!
     hangman_intro(); //quick intro to the game
 
-    string CODEWORD = "CODEWORDXD"; //first variable
-    string ANS = "__________";
+    string CODEWORD = ("thief", "theft", "loots", "fraud", "sneak", "skulk", "crime", "crook", "banks"); //first variable
+    string ANS = "_____";
     int misses = 0;
     vector<char> incorrect;
     bool guess = false;

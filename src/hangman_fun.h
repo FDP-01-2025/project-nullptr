@@ -2,6 +2,7 @@
 #define HANGMAN_FUN_H 
 #include <iostream>
 #include <vector>
+#include <random>
 using namespace std;
 
 int misses = 1;
@@ -32,7 +33,7 @@ void display_misses(int misses)     //A display with the amount of misses and th
     }
     else if (misses==1)
     {
-    cout<<"2 MISSES! 2 ATTEMPTS REMAINING!!" <<endl;
+    cout<<"1 MISS! 3 ATTEMPTS REMAINING!!" <<endl;
     cout<<"========="  <<endl;
     cout<<"  +---+"  <<endl;
     cout<<"  |   |" <<endl;
