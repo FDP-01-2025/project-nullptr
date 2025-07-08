@@ -9,41 +9,8 @@
 #include "src\alphnumbseq.h"
 #include "src\blackjack.cpp"
 #include "src\intromenu.h"
+#include "src\savesystem.h"
 using namespace std;
-struct saveData {
-    int lives;
-    int currentStage;
-};
-
-void saveProgress(const saveData& data) {
-    ofstream file("gameSaveFile.txt");
-    if (file.is_open()) {
-        file << data.lives << endl;
-        file << data.currentStage << endl;
-        file.close();
-    }
-}
-
-bool loadProgress(saveData& data) {
-    ifstream file("gameSaveFile.txt");
-    if (file.is_open()) {
-        file >> data.lives;
-        file >> data.currentStage;
-        file.close();
-        return true;
-    }
-    return false;
-}
-
-void promptToSave(int lives, int stage) {
-    char saveOpt;
-    cout<<"Do you want to save your progress? [Y/N]: ";
-    cin >> saveOpt;
-    if (saveOpt == 'Y' || saveOpt == 'y') {
-        saveProgress({lives, stage});
-        cout << "Progress saved.\n";
-    }
-}
 
 int main() {
     saveData data = {3, 0};
@@ -71,7 +38,6 @@ int main() {
         passed = intromenu();
         if (!passed) return 0;
         stage = 1;
-        promptToSave(lives, stage);
     }
     else
 
