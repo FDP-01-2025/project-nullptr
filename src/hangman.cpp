@@ -11,7 +11,7 @@ void end_game(string ANS, string CODEWORD);
 
 //HANGMAN IS DOWN HERE
 bool playhangman() {
-
+    bool passgame;
     //HANGMAN starts under this message!!!
     hangman_intro(); //quick intro to the game
 
@@ -51,7 +51,15 @@ bool playhangman() {
     guess = false;
     }
 
-    hangman_outro(ANS, CODEWORD);
-
+    passgame=hangman_outro(ANS, CODEWORD);
+    if (passgame)
+    {
+        return true;
+    }
+    else if (!passgame)
+    {
+        return false;
+    }
+    
     //HANGMAN ends before this message!!!
 }

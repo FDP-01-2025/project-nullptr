@@ -104,7 +104,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0) { cout << "GAME OVER\n"; return 0;}
 
     cout<<"                                'You got me, thief!' He says.\n";
     cout<<"                         'As promised, I'll take you to your money.'\n";
@@ -132,7 +132,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0) { cout << "GAME OVER\n"; return 0;}
 
     cout<<"You got the money! Great job thief! This is a very good start.\n";
     cout<<"    Now you can move to the next area! The museum!\n";
@@ -161,7 +161,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0) { cout << "GAME OVER\n"; return 0;}
     
     cout<<"You found the treasure but this place is huge... there must be more!\n";
     cout<<"                      Explore a bit!\n";
@@ -181,7 +181,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0) { cout << "GAME OVER\n"; return 0;}
 
     cout<<"You run into the night with both treasures in your hands! You're unstoppable!\n";
     cout<<"                  [Input any button to continue]\n";
@@ -216,7 +216,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0) { cout << "GAME OVER\n"; return 0;}
 
     cout<<"You crack the code with ease and step into the safe, the money is at the far back and- Woah! Wait!\n";
     cout<<"       You see a very tiny beam of red light cutting through the room... Lasers?!\n";
@@ -239,7 +239,7 @@ int main() {
             cout << "You got " << lives << " tries left\n";
         }
     }
-    if (lives == 0) return cout << "GAME OVER\n", 0;
+    if (lives == 0)  { cout << "GAME OVER\n"; return 0;}
 
     cout<<"You run out of the bank as the alarm is triggered, no one has the speed to chase you and you escape with ease\n";
     cout<<"              You count the money... It's more than enough for your son!\n";
