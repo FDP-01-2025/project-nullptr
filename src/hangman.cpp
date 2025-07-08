@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 #include "hangman_fun.h"
 using namespace std;
 
@@ -15,7 +18,10 @@ bool playhangman() {
     //HANGMAN starts under this message!!!
     hangman_intro(); //quick intro to the game
 
-    string CODEWORD = ("thief", "theft", "loots", "fraud", "sneak", "skulk", "crime", "crook", "banks"); //first variable
+    const char* CODEWORDS[] = {"THIEF", "THEFT", "LOOTS", "FRAUD", "SNEAK", "CRIME", "CROOK", "BANKS"}; //first variable
+    int size = sizeof(CODEWORDS) / sizeof(CODEWORDS[0]);
+    srand(time(0));
+    const char* CODEWORD = CODEWORDS[rand() %size];
     string ANS = "_____";
     int misses = 0;
     vector<char> incorrect;
@@ -32,7 +38,7 @@ bool playhangman() {
     cin>>letter;
 
 
-    for(int i=0; i<CODEWORD.length(); i++)
+    for(int i=0; i<strlen(CODEWORD); i++)
     {
         if(letter==CODEWORD[i])
         {
