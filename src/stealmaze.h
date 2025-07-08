@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void seemaze(char mazebase[20][20], int xcoord, int ycoord)
+void seemaze(char mazebase[20][20], int xcoord, int ycoord)//Show the maze
 {
     cout << "+";
     for (int i = 0; i < 20; i++)
@@ -32,7 +32,7 @@ void seemaze(char mazebase[20][20], int xcoord, int ycoord)
         cout << "+" << endl;
     }
 }
-bool playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
+bool playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)//the player move around the maze
 {
     int movescount=80;
     char movement;
@@ -63,16 +63,16 @@ bool playingmaze(char mazebase[20][20], int xcoordi, int ycoordi)
 
         if (mazebase[Yy][Xx] == 'W')
         {
-            cout << "I escaped!\n";
+            cout << "\033[32mI escaped!\033[0m\n";
             return true;
         }
 
         xcoordi = Xx;
         ycoordi = Yy;
-        movescount--;
+        movescount--;//removes a move per turn
         
     }
-    cout << "No more moves. I got caught!\n";
+    cout << "\033[31mNo more moves. I got caught!\033[0m\n";
     return false;
 }
 

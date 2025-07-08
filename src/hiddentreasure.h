@@ -1,7 +1,7 @@
 #ifndef HIDDENTREASURE_H
 #define HIDDENTREASURE_H
 using namespace std;
-void playervisionsmap(char basemap[8][10], bool playermap[8][10])
+void playervisionsmap(char basemap[8][10], bool playermap[8][10])//show the map that the player is discovering
 {
     cout << "   ";
     for (int col = 0; col < 10; col++)
@@ -27,7 +27,7 @@ void playervisionsmap(char basemap[8][10], bool playermap[8][10])
         cout << endl;
     }
 }
-void guidesystem(char basemap[8][10], int row, int column)
+void guidesystem(char basemap[8][10], int row, int column) //the system guides the player to know what could be nearby
 {
     bool treasurenearby = false;
     bool trapnearby = false;
@@ -85,7 +85,7 @@ void guidesystem(char basemap[8][10], int row, int column)
         cout << "Something bad might happen in this zone.\n";
     }
 }
-void movement(
+void movement( //the palyer enters the space he wants to reveal
     char basemap[8][10],
     bool playermap[8][10],
     int &turn,
