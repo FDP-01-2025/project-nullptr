@@ -163,7 +163,19 @@ void toggleshield(int row, int col) {
 }
 
 bool playGame() {
-    cout << "=== MINEWEEPER ===\n";       // Game title
+    cout << "\033[31m"; //game title
+    cout << "ooooo              .o.        .oooooo..o oooooooooooo ooooooooo.         ooooooooo.     .oooooo.     .oooooo.   ooo        ooooo "<<endl; 
+    cout << "`888'             .888.      d8P'    `Y8 `888'     `8 `888   `Y88.       `888   `Y88.  d8P'  `Y8b   d8P'  `Y8b  `88.       .888' "<<endl;
+    cout << " 888             .8''88.     Y88bo.       888          888   .d88'        888   .d88' 888      888 888      888  888b     d'888 "<<endl;
+    cout << " 888            .8' `888.     `'Y8888o.   888oooo8     888ooo88P'         888ooo88P'  888      888 888      888  8 Y88. .P  888  "<<endl;
+    cout << " 888           .88ooo8888.        `'Y88b  888          888`88b.           888`88b.    888      888 888      888  8  `888'   888  "<<endl;
+    cout << " 888       o  .8'     `888.  oo     .d8P  888       o  888  `88b.         888  `88b.  `88b    d88' `88b    d88'  8    Y     888  "<<endl;
+    cout << "o888ooooood8 o88o     o8888o 8""88888P'   o888ooooood8 o888o  o888o       o888o  o888o  `Y8bood8P'   `Y8bood8P'  o8o        o888o "<<endl;  
+    cout << endl;
+    cout << "        Welcome to LaserRoom - Turn off the sensors!\n";
+    cout << "-----------------------------------------------------------\n\n"; 
+    cout << "\033[0m";
+    cout << endl;
     cout << "Commands:\n";                  // Instructions header
     cout << "R row col - Reveal cell\n";   // How to reveal
     cout << "F row col - Toggle shield\n";   // How to put a shield             
