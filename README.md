@@ -5,25 +5,51 @@
 
 TEMATICA 
 
-En este proyecto nuestro grupo desarrollará ThreeSteals, una pequeña aventura en el que el jugador deberá resolver minijuegos de dificultad ascendente para progresar y completar el objetivo, robar el banco mas prestigioso de la ciudad. El juego sigue a un ladrón que debe abrir 5 cajas fuerte de el banco, aumentando la dificultad a medida que avanza. Cada caja fuerte tiene una contraseña y para abrirlas y descifrar la contraseña, el jugador debe ir avanzando y anteponerse antes los diferentes minijuegos, donde cada uno de ellos representando un desafio diferente, con el límite de 5 intentos.
+En este proyecto nuestro grupo desarrollará ThreeSteals, una pequeña aventura en el que el jugador deberá resolver minijuegos  para progresar y completar el objetivo, robar un casino, un museo y un banco. El juego sigue a un ladrón que debe robar en estas locaciones para salvar a su hijo. aumentando la dificultad a medida que avanza. Cada locacion cuenta con dos minijuegos, donde cada uno de ellos representando un desafio diferente, con el límite de 3 generales para los 6 minijuegos totales.
 
 MECANICA PRINCIPAL. 
 
-El juego consta de 5 fases, cada una abriendo una cajda fuerte, para asaltar el banco exitosamente hay que pasar 5 minijuegos. Cada minijuego da como recompensa el poder abrir la caja fuerte y saquearla. Si fallas en un minijuego, se te restara una vida, de las 5 totales que tienes, si te acabas todas tus vidas, la policia lograra atraparte, perdiendo tu progreso, y asimismo iniciando desde el punto de partida, asi hasta que logres superar todos los minijuegos, y hacerte con el premio mayor.
+Se deben de realizar tres robos, para que estos robos se desarrollen el jugador debera pasar dos minijuegos en cada locación, un casino, un museo y un banco. Durante todo el transcurso del juego se cuenta con 3 vidas, si fallas en un minijuego tendras que repetirlo ademas de perder una vida, si pierdes todas las vidas es fin del juego y si logras superar los 6 minijuegos ganas.
 
 OBJETIVO DEL JUGADOR. 
 
-El objetivo del jugador es pasar las tres cajas fuertes para ganar el juego, descifrando la clave de cada una de las cajas fuertes y robar su contenido, y al mismo tiempo manteniendo al menos una de las cinco vidas que se le son otorgadas. 
+El objetivo del jugador es pasar las tres locaciones para ganar el juego, y al mismo tiempo manteniendo al menos una de las tres vidas que se le son otorgadas. 
 
 IDEA GENERAL DE JUGABILIDAD 
 
-Poner a prueba la capacidad del jugador para desenvolverse en diferentes situaciones desafiantes, al mismo tiempo en que el que se somete en la presión de lo que se sentiria robar un banco, intentar hackear cajas fuertes, etc., todo eso en la menor cantidad de tiempo posible.
+Poner a prueba la capacidad del jugador para desenvolverse en diferentes situaciones desafiantes, puzzles tales como adivinar la secuencia, ahorcado, laberintos, buscaminas y la busqueda oculta del tesoro. Tambien un pequeño blackjack que se hace emocionante.
 
-APLICACIÓN DE TEMAS  
+FUNCIONAMIENTO
+Primeramente si tienes una partida guardada las puedes cargar.
+Luego un menu para empezar el juego o salir de este.
+Si empiezas el juego tendras la sucesion de minijuegos.
+Blackjack: Tienes que tener 21 puntos o la cantidad mas cercana posible sin pasarte con las cartas que te den. Gana 5 rondas al dealer.
+Codebreaker: Juego estilo wordle, adivina la secuencia de numeros y letras.
+Hiddenpaintings: Encuentra las 7 pinturas, no te quedes sin turnos.
+MazeSteal: Escapa del laberinto.
+Hangman: Adivina las palabra en número limitado de intentos.
+LaserRoom: Evita los sensores y descubre todas las casillas. 
 
-Se aplican los temas básicos como ‘cout’ y ‘cin’ para presentar los minijuegos y recibir comandos que el jugador ingrese.
+EJEMPLOS DE TEMAS.
+La historia se da en couts, los minijuegos requieres constante ingreso de algun tipo de variable por parte del jugador.
+Estructuras condicionales: Las funciones booleanas las cuales dan true or false dependiendo si se paso o perdio el juego.
+Ciclos: For para la construccion de mapas y while para que los juegos se repitan hasta que logren pasarse.
+Funciones: Los minijuegos son funciones.
+Estructura de datos: El blackjack requirio de structs para las manos de cartas.
+Manejo de archivos: Se permite guardar el juego.
 
-La sentencia “for” se utilizará para algunos de los minijuegos para poder crear bucles.
+MOCKUPS
+![alt text](image.png)
+![alt text](image-2.png)
+
+## Instrucciones de Ejecución
+
+1. Clona este repositorio en tu máquina local:
+   ```bash
+   git clone [https://github.com/FDP-01-2025/project-nullptr]
+
+2. Una vez con los archivos descargados o clonados del repositorio es tan facil como crear un ejecutable a partir del main en una terminal, asegurate de estar en la carpeta donde el main se encuentra. 
+Ejemplo: g++ main.cpp -o ejecutableThreeSteals
 
 
 ## Equipo
@@ -44,8 +70,4 @@ La sentencia “for” se utilizará para algunos de los minijuegos para poder c
 4. **Nombre completo:** [Eduardo Gabriel Pacas Mejía]  
    **Carnet:** [00134525]
 
-## Instrucciones de Ejecución
 
-1. Clona este repositorio en tu máquina local:
-   ```bash
-   git clone [https://github.com/FDP-01-2025/project-nullptr]
